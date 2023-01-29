@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -15,28 +16,22 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        request()->json([
+            'articles' => 1
+        ]); 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreArticleRequest  $request
+     * @param  \App\Http\Requests\ArticleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        return request()->json([
+           'article' => Article::create(array_merge($request->validated(), ['author' => Auth::id()]))    
+        ]); 
     }
 
     /**
@@ -51,24 +46,13 @@ class ArticleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Article  $article
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Article $article)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateArticleRequest  $request
+     * @param  \App\Http\Requests\ArticleRequest  $request
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
         //
     }
