@@ -10,6 +10,12 @@ use Prettus\Repository\Exceptions\RepositoryException;
 
 class ArticleRepository extends BaseRepository
 {
+    /**
+     * @var string[]
+     */
+    protected $fieldSearchable = [
+        'title' => 'like'
+    ];
 
     /**
      * @return string

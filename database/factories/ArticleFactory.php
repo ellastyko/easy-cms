@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory
@@ -19,9 +18,10 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'title'   => fake()->realText(60),
+            'title'   => fake()->realText(40),
             'content' => fake()->realText,
-            'author_id'  => User::inRandomOrder()->first()->id,
+            'author_id' => User::inRandomOrder()->first()->id,
+            'created_at' => fake()->date
         ];
     }
 }

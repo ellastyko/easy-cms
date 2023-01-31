@@ -8,10 +8,14 @@ import Rating from 'primevue/rating';
 import RadioButton from 'primevue/radiobutton';
 import InputSwitch from 'primevue/inputswitch';
 import InputNumber from 'primevue/inputnumber';
+import SelectButton from "primevue/selectbutton";
+import Dropdown from "primevue/dropdown";
 
 export default {
+    Dropdown,
     AutoComplete,
     MultiSelect,
+    SelectButton,
     Password,
     Paginator,
     Button,
