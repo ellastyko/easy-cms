@@ -10,21 +10,25 @@
         name: 'LandingPage',
         components: { },
         mounted() {
+            this.getArticles()
         },
         computed: {
 
         },
         data() {
             return {
-                selectedCountry: 'Germany',
-                filteredCountriesBasic: [
-                    'Germany', 'Russia'
-                ]
+                articles: [],
+                filters: {
+                    search: '',
+                    orderBy: 'created_at',
+                    sortBy: 'desc'
+                },
             }
         },
         methods: {
-            searchCountry () {
-
+            async getArticles () {
+                const response = await axios.get('/api/articles', { params: this.filters })
+                this.articles = response.data.articles
             }
         }
     }

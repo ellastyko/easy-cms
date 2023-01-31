@@ -4,20 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Http\Requests\ArticleRequest;
+use App\Repositories\ArticleRepository;
 use Illuminate\Support\Facades\Auth;
+use Prettus\Repository\Exceptions\RepositoryException;
 
 class ArticleController extends Controller
 {
     /**
+     * @param ArticleRepository $articleRepository
+     */
+    public function __construct(protected ArticleRepository $articleRepository)
+    {
+    }
+
+    /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
+     * @throws RepositoryException
      */
     public function index()
     {
-        request()->json([
-            'articles' => 1
-        ]); 
+        return response()->json([
+            'articles' =>  $this->articleRepository->filter()
+        ]);
     }
 
     /**
@@ -29,8 +39,8 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         return request()->json([
-           'article' => Article::create(array_merge($request->validated(), ['author' => Auth::id()]))    
-        ]); 
+           'article' => Article::create(array_merge($request->validated(), ['author' => Auth::id()]))
+        ]);
     }
 
     /**
