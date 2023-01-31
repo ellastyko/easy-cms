@@ -16,7 +16,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @vite(['resources/css/app.scss', 'resources/scss/app.scss'])
+    @vite(['resources/css/app.css', 'resources/scss/app.scss'])
 </head>
 <body>
     <div id="app">

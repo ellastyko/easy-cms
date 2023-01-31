@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use App\Http\Requests\ArticleRequest;
 use App\Repositories\ArticleRepository;
@@ -26,7 +27,7 @@ class ArticleController extends Controller
     public function index()
     {
         return response()->json([
-            'articles' =>  $this->articleRepository->filter()
+            'articles' => ArticleResource::collection($this->articleRepository->filter())
         ]);
     }
 
@@ -39,7 +40,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         return request()->json([
-           'article' => Article::create(array_merge($request->validated(), ['author' => Auth::id()]))
+           'article' => Article::create(array_merge($request->validated(), ['author_id' => Auth::id()]))
         ]);
     }
 

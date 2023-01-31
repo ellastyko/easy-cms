@@ -18,7 +18,7 @@ class Article extends Model
     protected $fillable = [
         'title',
         'content',
-        'author',
+        'author_id',
     ];
 
     /**
@@ -26,6 +26,6 @@ class Article extends Model
      */
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'author');
+        return $this->belongsTo(User::class, 'author_id', 'id');
     }
 }

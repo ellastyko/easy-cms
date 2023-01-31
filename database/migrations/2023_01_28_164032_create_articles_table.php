@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->foreignId('author')
+            $table->foreignId('author_id')
                 ->nullable()
                 ->constrained('users')
                 ->nullOnDelete();

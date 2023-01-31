@@ -21,7 +21,7 @@ class ArticleFactory extends Factory
         return [
             'title'   => fake()->realText(60),
             'content' => fake()->realText,
-            'author'  => User::inRandomOrder()->first()->id,
+            'author_id'  => User::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -1,3 +1,6 @@
 @import 'primevue/resources/themes/bootstrap4-light-blue/theme.css';
 @import 'primevue/resources/primevue.css';
 @import 'primeicons/primeicons.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

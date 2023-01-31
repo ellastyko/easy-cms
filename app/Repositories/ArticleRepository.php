@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Collection;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -27,6 +26,6 @@ class ArticleRepository extends BaseRepository
     {
         $this->pushCriteria(new RequestCriteria(request()));
 
-        return $this->all();
+        return $this->with('author')->all();
     }
 }
