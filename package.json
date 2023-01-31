@@ -8,15 +8,18 @@
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.2",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "vite": "^4.0.0",
         "normalize-scss": "^7.0.1",
+        "postcss": "^8.1.14",
         "primeicons": "5.0.0",
         "primevue": "^3.17.0",
         "sass": "^1.55.0",
+        "vite": "^4.0.0",
         "vue": "^3.2.39",
         "vue-cookies": "^1.8.1",
         "vue-router": "^4.1.5",
         "vuex": "^4.0.2"
+    },
+    "dependencies": {
+        "@vitejs/plugin-vue": "^4.0.0"
     }
 }

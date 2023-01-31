@@ -8,7 +8,7 @@ ARTISAN := $(APP) php artisan
 
 
 setup: env keygen deps start migrate seeds chmod
-good: deps clear refresh seeds node-dev
+good: deps clear refresh seeds node-install node-dev
 build: deps start migrate node-build
 
 restart: stop start
@@ -18,6 +18,9 @@ start:
 
 stop:
 	@$(SAIL) down
+
+node-install:
+	@$(NODE) install
 
 node-dev:
 	@$(NODE) run dev

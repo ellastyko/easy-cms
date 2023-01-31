@@ -1,0 +1,6 @@
+@import 'node_modules/normalize-scss/sass/normalize/import-now';
+@import '_variables.scss';
+
+* {
+    font-family: $--font-main;
+}

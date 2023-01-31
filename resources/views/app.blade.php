@@ -16,10 +16,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @vite(['resources/css/app.css', 'resources/scss/app.scss'])
+    @vite(['resources/css/app.scss', 'resources/scss/app.scss'])
 </head>
 <body>
-    @yield('content')
+    <div id="app">
+        <landing-page/>
+    </div>
     @vite('resources/js/app.js')
     @yield('scripts')
 </body>
