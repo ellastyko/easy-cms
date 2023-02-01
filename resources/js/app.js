@@ -1,7 +1,7 @@
 import './bootstrap';
 import Container from "./foundation/services/container";
 
-// Components
+// Views
 import views from "./views";
 
 // PrimeVue

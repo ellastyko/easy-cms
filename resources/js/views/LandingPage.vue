@@ -22,12 +22,7 @@
                         class=""
                         v-for="article in articles" :key="article.id"
                     >
-                        <h1 class="mb-1 font-bold text-3xl flex gap-1 items-baseline font-mono">{{ article.title }}
-                            <span class="text-sm text-purple-700">{{ article.author.name }}</span>
-                        </h1>
-                        <div class="grid max-w-3xl gap-2 py-10 px-8 sm:grid-cols-2 bg-white rounded-md border-t-4 border-purple-400">
-                            <p class="text-gray-700 text-base">{{ article.content }}</p>
-                        </div>
+                       <Article :data="article"/>
                     </div>
                 </div>
             </div>
@@ -37,11 +32,12 @@
 
 <script>
     import NavBar from "../components/NavBar.vue";
+    import Article from "../components/Article.vue";
     import LandingSidebar from "../components/LandingSidebar.vue";
 
     export default {
         name: 'LandingPage',
-        components: { NavBar, LandingSidebar },
+        components: {Article, NavBar, LandingSidebar },
         mounted() {
             this.getArticles()
         },

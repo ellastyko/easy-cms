@@ -44,7 +44,3 @@ export default {
     name: "LandingSidebar"
 }
 </script>
-
-<style scoped>
-
-</style>
