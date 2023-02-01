@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         request()->json([
-            'users' => UserResource::collection(User::with('articles'))
+            'users' => UserResource::collection(User::with('articles')),
         ]);
     }
 
@@ -30,7 +30,7 @@ class UserController extends Controller
     public function store(ArticleRequest $request)
     {
         return request()->json([
-           'user' => User::create(array_merge($request->validated(), ['author' => Auth::id()]))
+            'user' => User::create(array_merge($request->validated(), ['author' => Auth::id()])),
         ]);
     }
 

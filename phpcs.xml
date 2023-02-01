@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<ruleset>
+    <file>app</file>
+    <file>database</file>
+    <file>config</file>
+    <rule ref="PSR12"/>
+
+    <!--
+        Align statements
+    -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <properties>
+            <property name="maxPadding" value="20"/>
+            <property name="error" value="true"/>
+        </properties>
+    </rule>
+
+    <!--
+        Empty statement is forbidden
+    -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+
+    <!--
+        Make empty space after cast (int) $var
+    -->
+    <rule ref="Generic.Formatting.SpaceAfterCast"/>
+
+    <!--
+        Constructor is __construct
+    -->
+    <rule ref="Generic.NamingConventions.ConstructorName"/>
+
+    <!--
+        All constants should be in upper case
+    -->
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+
+    <!--
+        Avoid unused concat of strings (add after researches)
+    -->
+    <rule ref="Generic.Strings.UnnecessaryStringConcat">
+        <!--    Remove in future    -->
+        <severity>0</severity>
+    </rule>
+
+    <!--
+         Ensure 2 blank lines between member vars,
+         but don't require blank lines before the first.
+    -->
+    <rule ref="Squiz.WhiteSpace.MemberVarSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="spacingBeforeFirst" value="0" />
+        </properties>
+    </rule>
+
+    <!--
+        Ensure 1 blank line before and after functions, except at the top and bottom.
+    -->
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="spacingBeforeFirst" value="0" />
+            <property name="spacingAfterLast" value="0" />
+        </properties>
+    </rule>
+
+    <!--
+        Bool operator should place at first placement
+    -->
+    <rule ref="PSR12.ControlStructures.BooleanOperatorPlacement">
+        <properties>
+            <property name="allowOnly" value="first" />
+        </properties>
+    </rule>
+
+    <!--
+        No spaces surrounding operator ->
+    -->
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+
+    <!--
+        Ban some functions
+    -->
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="forbiddenFunctions" type="array">
+                <element key="sizeof" value="count"/>
+                <element key="delete" value="unset"/>
+                <element key="print" value="echo"/>
+                <!--    <element key="is_null" value="null"/>   -->
+                <element key="create_function" value="null"/>
+            </property>
+            <property name="error" value="true" />
+        </properties>
+    </rule>
+
+    <!--
+        Array rules
+     -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.Arrays.ArrayIndent"/>
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <rule ref="Squiz.Arrays.ArrayDeclaration">
+        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.FirstValueNoNewline"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.NotLowerCase"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNoNewline"/>
+    </rule>
+
+    <!--
+        Doc blocks
+    -->
+    <rule ref="Squiz.Commenting">
+        <exclude name="Squiz.Commenting.PostStatementComment"/>
+        <exclude name="Squiz.Commenting.BlockComment"/>
+        <exclude name="Squiz.Commenting.FileComment"/>
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment"/>
+        <exclude name="Squiz.Commenting.FunctionCommentThrowTag"/>
+        <exclude name="Squiz.Commenting.FunctionComment"/>
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+        <exclude name="Squiz.Commenting.ClassComment.TagNotAllowed"/>
+        <exclude name="Squiz.Commenting.ClassComment.Missing"/>
+        <exclude name="Squiz.Commenting.LongConditionClosingComment.Missing"/>
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Missing"/>
+        <exclude name="Squiz.Commenting.InlineComment"/>
+        <exclude name="Squiz.Commenting.VariableComment.IncorrectVarType"/>
+        <exclude name="Squiz.Commenting.VariableComment.TagNotAllowed"/>
+        <exclude name="Squiz.Commenting.VariableComment.Missing"/>
+        <exclude name="Squiz.Commenting.VariableComment.VarOrder"/>
+        <exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
+    </rule>
+</ruleset>

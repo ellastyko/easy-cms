@@ -27,7 +27,7 @@ class ArticleController extends Controller
     public function index()
     {
         return response()->json([
-            'articles' => ArticleResource::collection($this->articleRepository->filter())
+            'articles' => ArticleResource::collection($this->articleRepository->filter()),
         ]);
     }
 
@@ -40,7 +40,7 @@ class ArticleController extends Controller
     public function store(ArticleRequest $request)
     {
         return request()->json([
-           'article' => Article::create(array_merge($request->validated(), ['author_id' => Auth::id()]))
+            'article' => Article::create(array_merge($request->validated(), ['author_id' => Auth::id()])),
         ]);
     }
 

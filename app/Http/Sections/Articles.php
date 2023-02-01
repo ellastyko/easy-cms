@@ -57,23 +57,21 @@ class Articles extends Section implements Initializable
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumn::link('title', 'Name', 'created_at')
-                ->setSearchCallback(function($column, $query, $search){
+                ->setSearchCallback(function ($column, $query, $search) {
                     return $query
-                        ->orWhere('title', 'like', '%'.$search.'%')
-                        ->orWhere('created_at', 'like', '%'.$search.'%')
+                        ->orWhere('title', 'like', '%' . $search . '%')
+                        ->orWhere('created_at', 'like', '%' . $search . '%')
                     ;
                 })
-                ->setOrderable(function($query, $direction) {
+                ->setOrderable(function ($query, $direction) {
                     $query->orderBy('title', $direction);
-                })
-            ,
+                }),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
-                ->setOrderable(function($query, $direction) {
+                ->setOrderable(function ($query, $direction) {
                     $query->orderBy('created_at', $direction);
                 })
-                ->setSearchable(false)
-            ,
+                ->setSearchable(false),
         ];
 
         $display = AdminDisplay::datatables()
@@ -88,13 +86,12 @@ class Articles extends Section implements Initializable
         $display->setColumnFilters([
             AdminColumnFilter::select()
                 ->setModelForOptions(\App\Models\Article::class, 'name')
-                ->setLoadOptionsQueryPreparer(function($element, $query) {
+                ->setLoadOptionsQueryPreparer(function ($element, $query) {
                     return $query;
                 })
                 ->setDisplay('name')
                 ->setColumnName('name')
-                ->setPlaceholder('All names')
-            ,
+                ->setPlaceholder('All names'),
         ]);
         $display->getColumnFilters()->setPlacement('card.heading');
 
@@ -112,15 +109,15 @@ class Articles extends Section implements Initializable
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()
                 ->addColumn([
-                AdminFormElement::text('title', 'Title')->required(),
-                AdminFormElement::textarea('content', 'Article content')->required(),
-                AdminFormElement::html('<hr>'),
-            ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')
+                    AdminFormElement::text('title', 'Title')->required(),
+                    AdminFormElement::textarea('content', 'Article content')->required(),
+                    AdminFormElement::html('<hr>'),
+                ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')
         ]);
 
         $form->getButtons()->setButtons([
-            'save_and_create'  => new SaveAndCreate(),
-            'cancel'  => (new Cancel()),
+            'save_and_create' => new SaveAndCreate(),
+            'cancel'          => (new Cancel()),
         ]);
 
         return $form;

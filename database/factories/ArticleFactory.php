@@ -18,10 +18,10 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            'title'   => fake()->realText(40),
-            'content' => fake()->realText,
-            'author_id' => User::inRandomOrder()->first()->id,
-            'created_at' => fake()->date
+            'title'      => fake()->realText(40),
+            'content'    => fake()->realText,
+            'author_id'  => User::inRandomOrder()->first()->id,
+            'created_at' => fake()->date,
         ];
     }
 }

@@ -44,7 +44,10 @@ class Roles extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fa fa-lightbulb-o');
+        $this->addToNavigation()
+            ->setAccessLogic(fn() => auth()->user()->isAdmin())
+            ->setPriority(100)
+            ->setIcon('fa fa-lightbulb-o');
     }
 
     /**
@@ -57,23 +60,21 @@ class Roles extends Section implements Initializable
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
             AdminColumn::link('name', 'Name', 'created_at')
-                ->setSearchCallback(function($column, $query, $search){
+                ->setSearchCallback(function ($column, $query, $search) {
                     return $query
-                        ->orWhere('name', 'like', '%'.$search.'%')
-                        ->orWhere('created_at', 'like', '%'.$search.'%')
+                        ->orWhere('name', 'like', '%' . $search . '%')
+                        ->orWhere('created_at', 'like', '%' . $search . '%')
                     ;
                 })
-                ->setOrderable(function($query, $direction) {
+                ->setOrderable(function ($query, $direction) {
                     $query->orderBy('created_at', $direction);
-                })
-            ,
+                }),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
-                ->setOrderable(function($query, $direction) {
+                ->setOrderable(function ($query, $direction) {
                     $query->orderBy('updated_at', $direction);
                 })
-                ->setSearchable(false)
-            ,
+                ->setSearchable(false),
         ];
 
         $display = AdminDisplay::datatables()
@@ -88,13 +89,12 @@ class Roles extends Section implements Initializable
         $display->setColumnFilters([
             AdminColumnFilter::select()
                 ->setModelForOptions(\App\Models\Role::class, 'name')
-                ->setLoadOptionsQueryPreparer(function($element, $query) {
+                ->setLoadOptionsQueryPreparer(function ($element, $query) {
                     return $query;
                 })
                 ->setDisplay('name')
                 ->setColumnName('name')
-                ->setPlaceholder('All names')
-            ,
+                ->setPlaceholder('All names'),
         ]);
         $display->getColumnFilters()->setPlacement('card.heading');
 

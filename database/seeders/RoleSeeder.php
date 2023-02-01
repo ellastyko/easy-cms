@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
     {
         foreach (RoleEnum::all() as $name) {
             Role::updateOrCreate([
-                'name' => $name
+                'name' => $name,
             ]);
         }
     }

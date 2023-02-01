@@ -14,7 +14,7 @@ class ArticleRepository extends BaseRepository
      * @var string[]
      */
     protected $fieldSearchable = [
-        'title' => 'like'
+        'title' => 'like',
     ];
 
     /**
