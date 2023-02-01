@@ -30,9 +30,9 @@ export default {
         }
     },
     methods: {
-        login() {
+        login(form) {
             axios
-                .post('/login', this.form)
+                .post('/login', form)
                 .then(response => window.location.href = '/admin')
                 .catch(error => toast.error(error.response.data.message, this.options))
         }
