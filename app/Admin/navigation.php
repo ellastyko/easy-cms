@@ -27,19 +27,4 @@ return [
         'icon'  => 'fas fa-info-circle',
         'url'   => route('admin.information'),
     ],
-     [
-        'title' => 'Content',
-        'pages' => [
-            (new Page(\App\Models\User::class))
-                ->setPriority(100)
-                ->setIcon('fas fa-users')
-                ->setUrl(route('admin.users'))
-                ->setAccessLogic(fn() => auth()->user()->isAdmin()),
-            (new Page(\App\Models\Article::class))
-                ->setPriority(100)
-                ->setIcon('fas fa-users')
-                ->setUrl(route('admin.articles'))
-                ->setAccessLogic(fn() => true),
-        ]
-     ]
 ];
