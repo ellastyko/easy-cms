@@ -8,16 +8,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('information', ['as' => 'admin.information', fn () => AdminSection::view('Admin Panel of Easy CMS | Test Project', 'Information')]);
 
 Route::group([
-    'as'         => 'admin.articles',
-    'controller' => Articles::class,
-], fn () => Route::get('/', 'onEdit'));
+    'as' => 'admin.articles',
+    'controller' => Articles::class
+], function () {});
 
 Route::group([
-    'as'         => 'admin.roles',
-    'controller' => Roles::class,
-], fn () => Route::get('/', 'onEdit'));
+    'as' => 'admin.roles',
+    'controller' => Roles::class
+], function () {});
 
 Route::group([
-    'as'         => 'admin.users',
-    'controller' => Users::class,
-], fn () => Route::get('/', 'onEdit'));
+    'as' => 'admin.users',
+    'controller' => Users::class
+], function () {});
+

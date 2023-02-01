@@ -8,6 +8,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Contracts\Initializable;
@@ -44,7 +45,9 @@ class Articles extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fa fa-lightbulb-o');
+        $this->addToNavigation()
+            ->setPriority(100)
+            ->setIcon('fa fa-lightbulb-o');
     }
 
     /**
@@ -86,8 +89,8 @@ class Articles extends Section implements Initializable
         $display->setColumnFilters([
             AdminColumnFilter::select()
                 ->setModelForOptions(\App\Models\Article::class, 'name')
-                ->setLoadOptionsQueryPreparer(function ($element, $query) {
-                    return $query;
+                ->setCallback(function ($element, $query) {
+                    return !Auth::user()->isAdmin() ? $query->where('author_id', Auth::id()) : $query;
                 })
                 ->setDisplay('name')
                 ->setColumnName('name')
@@ -111,6 +114,7 @@ class Articles extends Section implements Initializable
                 ->addColumn([
                     AdminFormElement::text('title', 'Title')->required(),
                     AdminFormElement::textarea('content', 'Article content')->required(),
+                    AdminFormElement::hidden('author_id')->setDefaultValue(Auth::id()),
                     AdminFormElement::html('<hr>'),
                 ], 'col-xs-12 col-sm-6 col-md-4 col-lg-4')
         ]);
