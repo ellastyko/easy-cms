@@ -2,12 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('', ['as' => 'admin.dashboard', function () {
-	$content = 'Define your dashboard here.';
-	return AdminSection::view($content, 'Dashboard');
-}]);
 
 Route::get('information', ['as' => 'admin.information', function () {
-	$content = 'Define your information here.';
+	$content = 'Admin Panel of Easy CMS | Test Project';
 	return AdminSection::view($content, 'Information');
 }]);
