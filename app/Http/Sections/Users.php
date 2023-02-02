@@ -12,8 +12,6 @@ use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Contracts\Initializable;
 use SleepingOwl\Admin\Form\Buttons\Cancel;
-use SleepingOwl\Admin\Form\Buttons\Save;
-use SleepingOwl\Admin\Form\Buttons\SaveAndClose;
 use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
@@ -57,7 +55,7 @@ class Users extends Section implements Initializable
      *
      * @return DisplayInterface
      */
-    public function onDisplay($payload = [])
+    public function onDisplay(array $payload = []): DisplayInterface
     {
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
@@ -73,9 +71,7 @@ class Users extends Section implements Initializable
                 }),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
-                ->setOrderable(function ($query, $direction) {
-                    $query->orderBy('updated_at', $direction);
-                })
+                ->setOrderable(fn ($q, $direction) => $q->orderBy('updated_at', $direction))
                 ->setSearchable(false),
         ];
 
@@ -91,9 +87,6 @@ class Users extends Section implements Initializable
         $display->setColumnFilters([
             AdminColumnFilter::select()
                 ->setModelForOptions(\App\Models\User::class, 'name')
-                ->setLoadOptionsQueryPreparer(function ($element, $query) {
-                    return $query;
-                })
                 ->setDisplay('name')
                 ->setColumnName('name')
                 ->setPlaceholder('All names'),
@@ -109,7 +102,7 @@ class Users extends Section implements Initializable
      *
      * @return FormInterface
      */
-    public function onEdit($id = null, $payload = [])
+    public function onEdit(int $id = null, array $payload = [])
     {
         $form = AdminForm::card()
             ->addBody([
@@ -128,8 +121,6 @@ class Users extends Section implements Initializable
             ]);
 
         $form->getButtons()->setButtons([
-            'save'            => new Save(),
-            'save_and_close'  => new SaveAndClose(),
             'save_and_create' => new SaveAndCreate(),
             'cancel'          => (new Cancel()),
         ]);
@@ -138,26 +129,20 @@ class Users extends Section implements Initializable
     }
 
     /**
+     * @param array $payload
      * @return FormInterface
      */
-    public function onCreate($payload = [])
+    public function onCreate(array $payload = []): FormInterface
     {
         return $this->onEdit(null, $payload);
     }
 
     /**
+     * @param Model $model
      * @return bool
      */
-    public function isDeletable(Model $model)
+    public function isDeletable(Model $model): bool
     {
         return true;
-    }
-
-    /**
-     * @return void
-     */
-    public function onRestore($id)
-    {
-        // remove if unused
     }
 }

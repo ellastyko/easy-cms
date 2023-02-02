@@ -55,7 +55,7 @@ class Roles extends Section implements Initializable
      *
      * @return DisplayInterface
      */
-    public function onDisplay($payload = [])
+    public function onDisplay($payload = []): DisplayInterface
     {
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
@@ -107,7 +107,7 @@ class Roles extends Section implements Initializable
      *
      * @return FormInterface
      */
-    public function onEdit($id = null, $payload = [])
+    public function onEdit($id = null, $payload = []): FormInterface
     {
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()
@@ -124,17 +124,19 @@ class Roles extends Section implements Initializable
     }
 
     /**
+     * @param array $payload
      * @return FormInterface
      */
-    public function onCreate($payload = [])
+    public function onCreate(array $payload = []): FormInterface
     {
         return $this->onEdit(null, $payload);
     }
 
     /**
+     * @param Model $model
      * @return bool
      */
-    public function isDeletable(Model $model)
+    public function isDeletable(Model $model): bool
     {
         return true;
     }
